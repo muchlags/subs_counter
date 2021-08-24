@@ -118,7 +118,7 @@
 					$("#thumb").attr("src",thumbnail.toLocaleString());
 
 					channelId = data["items"][0].id;
-					$("#ytlink").attr("href","www.youtube.com/channel/"+channelId.toLocaleString());
+					$("#ytlink").attr("href","https://www.youtube.com/channel/"+channelId.toLocaleString());
 										
 					country = data["items"][0].snippet.country;
 					$("#channelCountry").html(country.toLocaleString());
