@@ -117,8 +117,12 @@
 					thumbnail = data["items"][0].snippet.thumbnails.default.url;
 					$("#thumb").attr("src",thumbnail.toLocaleString());
 
+					channelId = data["items"][0].id;
+					$("#ytlink").attr("href","www.youtube.com/channel/"+channelId.toLocaleString());
+										
 					country = data["items"][0].snippet.country;
 					$("#channelCountry").html(country.toLocaleString());
+					
 					//unlockPB();
 				})
 			}
@@ -154,7 +158,7 @@
 					<div class="button mt-2 d-flex flex-row align-items-center">
 						<button class="btn btn-sm btn-outline-primary w-100">Twitter</button>
 						<button class="btn btn-sm btn-outline-primary w-100 ml-2">Facebook</button>
-						<button class="btn btn-sm btn-primary w-100 ml-2">Youtube</button>
+						<button class="btn btn-sm btn-primary w-100 ml-2"><a id="ytlink" href>Youtube</a></button>
 					</div>
 				</div>
 			</div>
