@@ -3,55 +3,70 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Youtuber Monitor</title>
+	<!--
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	-->
+	<link rel="stylesheet" type="text/css" href="font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<script type="text/javascript" src="bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
 	<style type="text/css">
-		body {
-		 background-color: #B3E5FC;
-		 border-radius: 10px
-		}
+		/* On screens that are 5120px wide or less*/
+		@media screen and (max-width: 5120px) {
+			body {
+			 background-color: #B3E5FC;
+			 border-radius: 10px
+			}
 
-		.card {
-		 /*width: 400px;*/
-		 border: none;
-		 border-radius: 10px;
-		 background-color: #fff
-		}
+			.card {
+			 /*width: 400px;*/
+			 border: none;
+			 border-radius: 10px;
+			 background-color: #fff
+			}
 
-		.stats {
-		 background: #f2f5f8 !important;
-		 color: #000 !important
-		}
+			.stats {
+			 background: #f2f5f8 !important;
+			 color: #000 !important
+			}
 
-		.articles {
-		 font-size: 10px;
-		 color: #a1aab9
-		}
+			.articles {
+			 font-size: 10px;
+			 color: #a1aab9
+			}
 
-		.number1 {
-		 font-weight: 500
-		}
+			.number1 {
+			 font-weight: 500
+			}
 
-		.followers {
-		 font-size: 10px;
-		 color: #a1aab9
-		}
+			.followers {
+			 font-size: 10px;
+			 color: #a1aab9
+			}
 
-		.number2 {
-		 font-weight: 500
-		}
+			.number2 {
+			 font-weight: 500
+			}
 
-		.rating {
-		 font-size: 10px;
-		 color: #a1aab9
-		}
+			.rating {
+			 font-size: 10px;
+			 color: #a1aab9
+			}
 
-		.number3 {
-		 font-weight: 500
+			.number3 {
+			 font-weight: 500
+			}
+			a{text-decoration:none;}
 		}
-		a{text-decoration:none;}
+		
+		/* On screens that are 540px wide or less */		
+		@media screen and (max-width: 541px) {
+			
+		}
+		
 	</style>
 	<script type="text/javascript">
 
@@ -86,6 +101,30 @@
 			//https://www.googleapis.com/youtube/v3/channels?part=snippet&id=UCg7HyPGsm_YR4uIxe0hskCw&key=AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c
 
 			//https://www.googleapis.com/youtube/v3/channels?part=topicDetails&id=UCg7HyPGsm_YR4uIxe0hskCw&key=AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c
+			
+			//mostpopular prototype=========================================
+			//https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails%2Cstatus&playlistId=UUg7HyPGsm_YR4uIxe0hskCw&key=AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c
+
+			//https://youtube.googleapis.com/youtube/v3/playlistItems?chart=mostPopular&part=snippet%2CcontentDetails%2Cstatus&playlistId=UUg7HyPGsm_YR4uIxe0hskCw&key=AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c
+
+			//best working
+			//to be combined with this: https://developers.google.com/youtube/v3/docs/videos#statistics.viewCount
+			//https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCg7HyPGsm_YR4uIxe0hskCw&order=viewCount&type=video&key=AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c
+
+			//https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC54egTjkOZzfqHp-2nYME1A&order=viewCount&type=video&key=AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c
+
+			//viewCount per video
+			//https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id=iPtDWbr5Wao&key=AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c 
+
+			//https://www.googleapis.com/youtube/v3/videos?part=statistics&id=
+
+			//&maxResults=50
+
+			//PU54egTjkOZzfqHp-2nYME1A //ASS popular videos playlist id
+
+			//via playlist
+			//https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails%2statistics&maxResults=50&playlistId=PU54egTjkOZzfqHp-2nYME1A&key=AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c
+			//mostpopular prototype=========================================
 			let getchannelsubs = (channelId) => {
 				fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${APIKey}`)
 				.then(response => {
