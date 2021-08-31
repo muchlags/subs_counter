@@ -135,8 +135,10 @@
 			//via playlist
 			//https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails%2statistics&maxResults=50&playlistId=PU54egTjkOZzfqHp-2nYME1A&key=AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c
 			//mostpopular prototype=========================================
-			let getchannelsubs = (channelId) => {
-				fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${APIKey}`)
+
+			
+			let getdata = (channelId) => {
+				fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=${channelId}&key=${APIKey}`)
 				.then(response => {
 					return response.json()
 				})
@@ -150,17 +152,6 @@
 					videoCount = data["items"][0].statistics.videoCount;
 					$("#videoCount").html(videoCount.toLocaleString());
 
-
-					//unlockPB();
-				})
-			}
-			let getchannelinfo = (channelId) => {
-				fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${APIKey}`)
-				.then(response => {
-					return response.json()
-				})
-				.then(data => {
-					console.log(data);
 					title = data["items"][0].snippet.title;
 					channelName.innerHTML = title.toLocaleString();
 
@@ -175,10 +166,6 @@
 					
 					//unlockPB();
 				})
-			}
-			let getdata = (channelId) => {
-				getchannelsubs(channelId);
-				getchannelinfo(channelId);
 			}
 
 			getdata(Userid);
