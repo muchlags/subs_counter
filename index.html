@@ -162,7 +162,7 @@
 					$("#ytlink").attr("href","https://www.youtube.com/channel/"+channelId.toLocaleString());
 										
 					country = data["items"][0].snippet.country;
-					if(country=="undefined"){
+					if(typeof country == "undefined"){
 						console.log("No country found.");
 					}else{
 						console.log(country);
