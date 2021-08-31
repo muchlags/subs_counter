@@ -164,6 +164,8 @@
 					country = data["items"][0].snippet.country;
 					if(country!="undefined"){
 						$("#channelCountry").html(country.toLocaleString());						
+					}else{
+						console.log("No country found.");
 					}
 					
 					//unlockPB();
