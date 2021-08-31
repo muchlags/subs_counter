@@ -162,7 +162,9 @@
 					$("#ytlink").attr("href","https://www.youtube.com/channel/"+channelId.toLocaleString());
 										
 					country = data["items"][0].snippet.country;
-					$("#channelCountry").html(country.toLocaleString());
+					if(country<>""){
+						$("#channelCountry").html(country.toLocaleString());						
+					}
 					
 					//unlockPB();
 				})
