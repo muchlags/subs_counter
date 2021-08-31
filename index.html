@@ -72,6 +72,26 @@
 
 
 		window.onload = function(){
+			//var card += '
+			//' + index + '
+			var card = '<div id="card1"class="card p-3"><div class="d-flex align-items-center">';
+			var card += '<div class="image"> <img id="thumb' + index + '" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded" width="155"> </div>';
+			var card += '<div class="ml-3 w-100">';
+			var card += '<h4 id="channelName' + index + '" class="mb-0 mt-0"></h4> <span id="channelCountry' + index + '">PH</span>';
+			var card += '<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">';
+			var card += '<div class="d-flex flex-column"> <span class="articles">Subscribers</span> <span id="subscriberCount' + index + '" class="number1">1000</span> </div>';
+			var card += '<div class="d-flex flex-column"> <span class="followers">Views</span> <span id="viewCount' + index + '" class="number2">4000</span> </div>';
+			var card += '<div class="d-flex flex-column"> <span class="rating">Total Videos</span> <span id="videoCount' + index + '" class="number3">100</span> </div>';
+			var card += '</div>';
+			var card += '<div class="button mt-2 d-flex flex-row align-items-center">';
+			var card += '<a class="btn btn-sm btn-outline-primary w-100"><button>Twitter</button></a>';
+			var card += '<a class="btn btn-sm btn-outline-primary w-100 ml-2"><button>Facebook</button></a>';
+			var card += '<a class="w-100 ml-2" style="color:white;" id="ytlink" target="_blank"><button class="btn btn-sm btn-primary w-100">Youtube</button></a>';
+			var card += '</div></div></div></div>';
+			
+			var contentContainer = document.getElementById("contentContainer");
+			contentContainer.innerHTML += card;
+			
 			// alert("wew");
 			const APIKey = 'AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c';
 			// const Userid = 'UCg7HyPGsm_YR4uIxe0hskCw'; //OGWP
