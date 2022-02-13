@@ -93,7 +93,7 @@
                 //' + index + '
                 // var index = 0;
                 var card = "<br>";
-                card = '<div id="card' + index + '"class="card p-3"><div class="d-flex align-items-center">';
+                card = '<div class="container mt-5 d-flex justify-content-center"><div id="card' + index + '"class="card p-3"><div class="d-flex align-items-center">';
                 card += '<div class="image"> <img id="thumb' + index + '" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded" width="155"> </div>';
                 card += '<div class="ml-3 w-100">';
                 card += '<h4 id="channelName' + index + '" class="mb-0 mt-0"></h4> <span id="channelCountry' + index + '">PH</span>';
@@ -106,7 +106,7 @@
                 card += '<a class="w-100"><button class="btn btn-sm btn-outline-primary w-100">Twitter</button></a>';
                 card += '<a class="w-100 ml-2"><button class="btn btn-sm btn-outline-primary w-100">Facebook</button></a>';
                 card += '<a class="w-100 ml-2" style="color:white;" id="ytlink' + index + '" target="_blank"><button class="btn btn-sm btn-primary w-100">Youtube</button></a>';
-                card += '</div></div></div></div><br><br>';
+                card += '</div></div></div></div></div><br><br>';
                 
                 var contentContainer = document.getElementById("contentContainer");
                 contentContainer.innerHTML += card;
@@ -232,7 +232,7 @@
 		<p>Current subscribers</p>
 		<h1 id="subscriberCount"></h1>
 	</div> -->
-	<div id="contentContainer" class="container mt-5 d-flex justify-content-center">
+	<div id="contentContainer" >
 		<!-- <div id="card1"class="card p-3">
 			<div class="d-flex align-items-center">
 				<div class="image"> <img id="thumb" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded" width="155"> </div>
