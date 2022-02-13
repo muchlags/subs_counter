@@ -106,7 +106,7 @@
                 card += '<a class="w-100"><button class="btn btn-sm btn-outline-primary w-100">Twitter</button></a>';
                 card += '<a class="w-100 ml-2"><button class="btn btn-sm btn-outline-primary w-100">Facebook</button></a>';
                 card += '<a class="w-100 ml-2" style="color:white;" id="ytlink' + index + '" target="_blank"><button class="btn btn-sm btn-primary w-100">Youtube</button></a>';
-                card += '</div></div></div></div>';
+                card += '</div></div></div></div><br><br>';
                 
                 var contentContainer = document.getElementById("contentContainer");
                 contentContainer.innerHTML += card;
@@ -165,11 +165,11 @@
 
 
             
-			getdata(Userid);
-			setInterval(function(){
-				getdata(Userid);
-			}, 10000);
 			//repeat
+			setInterval(function(){
+				Userids.forEach(fetchYTData);
+                console.log("Data Updated!");
+			}, 10000);
 			
 
 			
