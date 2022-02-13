@@ -72,48 +72,100 @@
 
 
 		window.onload = function(){
-			//var card += '
-			//' + index + '
-			var index = 0;
-			var card = "<br>";
-			card = '<div id="card1"class="card p-3"><div class="d-flex align-items-center">';
-			card += '<div class="image"> <img id="thumb' + index + '" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded" width="155"> </div>';
-			card += '<div class="ml-3 w-100">';
-			card += '<h4 id="channelName' + index + '" class="mb-0 mt-0"></h4> <span id="channelCountry' + index + '">PH</span>';
-			card += '<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">';
-			card += '<div class="d-flex flex-column"> <span class="articles">Subscribers</span> <span id="subscriberCount' + index + '" class="number1">1000</span> </div>';
-			card += '<div class="d-flex flex-column"> <span class="followers">Views</span> <span id="viewCount' + index + '" class="number2">4000</span> </div>';
-			card += '<div class="d-flex flex-column"> <span class="rating">Total Videos</span> <span id="videoCount' + index + '" class="number3">100</span> </div>';
-			card += '</div>';
-			card += '<div class="button mt-2 d-flex flex-row align-items-center">';
-			card += '<a class="w-100"><button class="btn btn-sm btn-outline-primary w-100">Twitter</button></a>';
-			card += '<a class="w-100 ml-2"><button class="btn btn-sm btn-outline-primary w-100">Facebook</button></a>';
-			card += '<a class="w-100 ml-2" style="color:white;" id="ytlink" target="_blank"><button class="btn btn-sm btn-primary w-100">Youtube</button></a>';
-			card += '</div></div></div></div>';
-			
-			var contentContainer = document.getElementById("contentContainer");
-			contentContainer.innerHTML += card;
-			
-			// alert("wew");
+
+            //declare ids
 			const APIKey = 'AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c';
 			// const Userid = 'UCg7HyPGsm_YR4uIxe0hskCw'; //OGWP
 			// const Userid = 'UCJZHe7U8WOxIBM_Gh0JOdrA'; //Pinats
 			// const Userid = 'UC54egTjkOZzfqHp-2nYME1A'; //ASS
-			const Userid = [
-				"UC54egTjkOZzfqHp-2nYME1A", 
-				"UCg7HyPGsm_YR4uIxe0hskCw", 
+			const Userids = [
+				"UC54egTjkOZzfqHp-2nYME1A", //ASS
+				"UCg7HyPGsm_YR4uIxe0hskCw", //OGWP
 				       ];
-			
-			Userid.forEach(myFunction);
-			function myFunction(item, index) {
-			  alert(item); 
-			}
-			
-			const subscriberCount = document.getElementById('subscriberCount');
-			const channelName = document.getElementById('channelName');
 
-			var subCount;
-			var locked = document.querySelectorAll(".active");
+			//construct cards
+            
+
+			Userids.forEach(constructCards);
+			function constructCards(item, index) {
+			    // alert(item); 
+              	//var card += '
+                //' + index + '
+                var index = 0;
+                var card = "<br>";
+                card = '<div id="card1"class="card p-3"><div class="d-flex align-items-center">';
+                card += '<div class="image"> <img id="thumb' + index + '" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded" width="155"> </div>';
+                card += '<div class="ml-3 w-100">';
+                card += '<h4 id="channelName' + index + '" class="mb-0 mt-0"></h4> <span id="channelCountry' + index + '">PH</span>';
+                card += '<div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">';
+                card += '<div class="d-flex flex-column"> <span class="articles">Subscribers</span> <span id="subscriberCount' + index + '" class="number1">1000</span> </div>';
+                card += '<div class="d-flex flex-column"> <span class="followers">Views</span> <span id="viewCount' + index + '" class="number2">4000</span> </div>';
+                card += '<div class="d-flex flex-column"> <span class="rating">Total Videos</span> <span id="videoCount' + index + '" class="number3">100</span> </div>';
+                card += '</div>';
+                card += '<div class="button mt-2 d-flex flex-row align-items-center">';
+                card += '<a class="w-100"><button class="btn btn-sm btn-outline-primary w-100">Twitter</button></a>';
+                card += '<a class="w-100 ml-2"><button class="btn btn-sm btn-outline-primary w-100">Facebook</button></a>';
+                card += '<a class="w-100 ml-2" style="color:white;" id="ytlink' + index + '" target="_blank"><button class="btn btn-sm btn-primary w-100">Youtube</button></a>';
+                card += '</div></div></div></div>';
+                
+                var contentContainer = document.getElementById("contentContainer");
+                contentContainer.innerHTML += card;
+			}
+
+			//get init data            
+			Userids.forEach(fetchYTData);
+			function fetchYTData(item, index) {
+                var subscriberCount = document.getElementById('subscriberCount'+index);
+                var channelName = document.getElementById('channelName'+index);
+
+                var subCount;
+                // var locked = document.querySelectorAll(".active");
+                let getdata = (item) => {
+                    fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=${item}&key=${APIKey}`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        subCount = data["items"][0].statistics.subscriberCount;
+                        subscriberCount.innerHTML = subCount.toLocaleString();
+
+                        viewCount = data["items"][0].statistics.viewCount;
+                        $("#viewCount"+index).html(viewCount.toLocaleString());
+                        videoCount = data["items"][0].statistics.videoCount;
+                        $("#videoCount"+index).html(videoCount.toLocaleString());
+
+                        title = data["items"][0].snippet.title;
+                        channelName.innerHTML = title.toLocaleString();
+
+                        thumbnail = data["items"][0].snippet.thumbnails.default.url;
+                        $("#thumb"+index).attr("src",thumbnail.toLocaleString());
+
+                        channelId = data["items"][0].id;
+                        $("#ytlink"+index).attr("href","https://www.youtube.com/channel/"+channelId.toLocaleString());
+                                            
+                        country = data["items"][0].snippet.country;
+                        if(typeof country == "undefined"){
+                            console.log("No country found.");
+                        }else{
+                            console.log(country);
+                            $("#channelCountry"+index).html(country.toLocaleString());
+                        }
+                        
+                        //unlockPB();
+                    })
+                }
+
+            }
+
+			//display yt data
+			//repeat
+			
+
+			
+
+			
+			
 
 			// var oneK = document.getElementById("one");
 			// var tenK = document.getElementById("two");
@@ -159,41 +211,7 @@
 			//mostpopular prototype=========================================
 
 			
-			let getdata = (channelId) => {
-				fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=${channelId}&key=${APIKey}`)
-				.then(response => {
-					return response.json()
-				})
-				.then(data => {
-					console.log(data);
-					subCount = data["items"][0].statistics.subscriberCount;
-					subscriberCount.innerHTML = subCount.toLocaleString();
 
-					viewCount = data["items"][0].statistics.viewCount;
-					$("#viewCount").html(viewCount.toLocaleString());
-					videoCount = data["items"][0].statistics.videoCount;
-					$("#videoCount").html(videoCount.toLocaleString());
-
-					title = data["items"][0].snippet.title;
-					channelName.innerHTML = title.toLocaleString();
-
-					thumbnail = data["items"][0].snippet.thumbnails.default.url;
-					$("#thumb").attr("src",thumbnail.toLocaleString());
-
-					channelId = data["items"][0].id;
-					$("#ytlink").attr("href","https://www.youtube.com/channel/"+channelId.toLocaleString());
-										
-					country = data["items"][0].snippet.country;
-					if(typeof country == "undefined"){
-						console.log("No country found.");
-					}else{
-						console.log(country);
-						$("#channelCountry").html(country.toLocaleString());
-					}
-					
-					//unlockPB();
-				})
-			}
 
 			getdata(Userid);
 			setInterval(function(){
