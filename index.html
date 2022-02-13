@@ -91,7 +91,7 @@
 			    // alert(item); 
               	//var card += '
                 //' + index + '
-                var index = 0;
+                // var index = 0;
                 var card = "<br>";
                 card = '<div id="card' + index + '"class="card p-3"><div class="d-flex align-items-center">';
                 card += '<div class="image"> <img id="thumb' + index + '" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded" width="155"> </div>';
@@ -125,7 +125,7 @@
                 let getdata = (item) => {
                     fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=${item}&key=${APIKey}`)
                     .then(response => {
-                        return response.json()
+                        return response.json();
                     })
                     .then(data => {
                         console.log(data);
