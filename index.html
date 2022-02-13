@@ -112,7 +112,8 @@
                 contentContainer.innerHTML += card;
 			}
 
-			//get init data            
+			//get init data        
+			//display yt data    
 			Userids.forEach(fetchYTData);
 			function fetchYTData(item, index) {
                 var subscriberCount = document.getElementById('subscriberCount'+index);
@@ -156,9 +157,17 @@
                     })
                 }
 
+                
+			    getdata(item);
+
             }
 
-			//display yt data
+
+            
+			getdata(Userid);
+			setInterval(function(){
+				getdata(Userid);
+			}, 10000);
 			//repeat
 			
 
@@ -213,10 +222,6 @@
 			
 
 
-			getdata(Userid);
-			setInterval(function(){
-				getdata(Userid);
-			}, 10000);
 		}
 
 	</script>
