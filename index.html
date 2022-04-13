@@ -3,6 +3,8 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Youtuber Monitor</title>
+	<!-- Version v0.4 -->
+
 	<!--
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
@@ -79,13 +81,37 @@
 
 
 		window.onload = function(){
+			$("#addUID").on("click", function(){
+				Userids[Userids.length] = $("#newUserID").val();
+
+                var contentContainer = document.getElementById("contentContainer");
+                contentContainer.innerHTML = "";
+
+				Userids.forEach(constructCards);			
+				Userids.forEach(fetchYTData);
+				$("#newUserID").val("")
+			});
+
+			var input = document.getElementById("newUserID");
+
+			// Execute a function when the user releases a key on the keyboard
+			input.addEventListener("keyup", function(event) {
+				// Number 13 is the "Enter" key on the keyboard
+				if (event.keyCode === 13) {
+			    	// Cancel the default action, if needed
+			    	event.preventDefault();
+			    	// Trigger the button element with a click
+			    	document.getElementById("addUID").click();
+			  	}
+			});
+
 
             //declare ids
 			const APIKey = 'AIzaSyC0GLaGvjYVVOiJL5SxuhPx8CqK5ZJwI7c';
 			// const Userid = 'UCg7HyPGsm_YR4uIxe0hskCw'; //OGWP
 			// const Userid = 'UCJZHe7U8WOxIBM_Gh0JOdrA'; //Pinats
 			// const Userid = 'UC54egTjkOZzfqHp-2nYME1A'; //ASS
-			const Userids = [
+			var Userids = [
 				"UC54egTjkOZzfqHp-2nYME1A", //ASS
 				"UCg7HyPGsm_YR4uIxe0hskCw", //OGWP
 				       ];
@@ -261,5 +287,10 @@
 			</div>
 		</div> -->
 	</div>
+	<div class="container mt-5 d-flex justify-content-center" style="margin-bottom: 3rem;">
+		<input id="newUserID" type="text" name="" autofocus="" placeholder="Enter Your Youtube Channel ID" style="width:270px">
+		<button style="margin-left: 10px;" id="addUID" class="btn btn-sm btn-primary">+Add</button>
+	</div>
+	
 </body>
 </html>
